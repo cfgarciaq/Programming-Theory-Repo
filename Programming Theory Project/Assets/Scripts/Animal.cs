@@ -34,7 +34,7 @@ public class Animal : MonoBehaviour
 
     public virtual void MakeNoise()
     {
-        if(audioSource != null)
+        if(noiseAudioClip != null)
         {
             audioSource.PlayOneShot(noiseAudioClip);
         }
