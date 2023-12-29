@@ -34,7 +34,34 @@ public class Animal : MonoBehaviour
 
     public virtual void MakeNoise()
     {
-        audioSource.PlayOneShot(noiseAudioClip);
+        if(audioSource != null)
+        {
+            audioSource.PlayOneShot(noiseAudioClip);
+        }
+        else
+        {
+            switch (animalType)
+            {
+                case AnimalType.Chicken:
+                    Debug.Log($"kokoroko!");
+                    break;
+                case AnimalType.Cow:
+                    Debug.Log($"Moo!");
+                    break;
+                case AnimalType.Duck:
+                    Debug.Log($"Quack!");
+                    break;
+                case AnimalType.Pig:
+                    Debug.Log($"Oink!");
+                    break;
+                case AnimalType.Sheep:
+                    Debug.Log($"Baa!");
+                    break;
+                default:
+                    Debug.Log($"Akward Silence");
+                    break;
+            }
+        }
     }
 
     public virtual void Eat()
