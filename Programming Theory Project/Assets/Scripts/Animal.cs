@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(BoxCollider))]
 public class Animal : MonoBehaviour
 {
     protected enum AnimalType{Chicken, Cow, Duck, Pig, Sheep, Null}
