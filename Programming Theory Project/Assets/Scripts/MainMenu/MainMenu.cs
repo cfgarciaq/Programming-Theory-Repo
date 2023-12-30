@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; // .UI clasic UI system - .UIElements new UI Toolkit System
 
+
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private InputField farmNameField;
@@ -20,9 +21,19 @@ public class MainMenu : MonoBehaviour
         {            
             Debug.LogWarning($"farm's name input field not assigned, drag and drop it in editor");
         }
+
+        if(startButton != null)
+        {
+            startButton.onClick.AddListener(() => LoadFarmScene());
+        }
+        else
+        {
+            Debug.LogWarning($"start button not assigned, drag and drop it in editor");
+        }
     }
 
-    private void ReadTextfield()
+
+    private void SaveFarmName()
     {
         string farm_name = farmNameField.text;
         // to do: save farms name to static class
@@ -31,8 +42,14 @@ public class MainMenu : MonoBehaviour
         //other stuff if needed
     }
 
-    public void LoadFarmScene()
+    private void LoadFarmScene()
     {
+        if (farmNameField.text == "" )
+        {
+            //To Do:Instantiate a warning UI
+            Debug.LogWarning($"No farm name entered");
+            return;
+        }
         //get farm name and save it for the play session
         SceneManager.LoadScene(1);
     }
