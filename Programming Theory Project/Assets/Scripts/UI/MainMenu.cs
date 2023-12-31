@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private InputField farmNameField;
     [SerializeField] private Button startButton;
+    [SerializeField] private GameObject notificationsPanel;
+    [SerializeField] private GameObject notificationPrefab;
 
     void Start()
     {
@@ -47,6 +49,8 @@ public class MainMenu : MonoBehaviour
         if (farmNameField.text == "" )
         {
             //To Do:Instantiate a warning UI
+            //*** implement Instantiation
+            //notificationsPanel.transform.parent = Instantiate(notificationPrefab);
             Debug.LogWarning($"No farm name entered");
             return;
         }
