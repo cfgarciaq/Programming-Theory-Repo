@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Start Farm
 --- !u!222 &83621057
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1492,6 +1492,7 @@ GameObject:
   - component: {fileID: 1654617243}
   - component: {fileID: 1654617242}
   - component: {fileID: 1654617241}
+  - component: {fileID: 1654617245}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1585,6 +1586,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1654617245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654617240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a821bc12da08d4d98be3b8ebd94211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farmNameField: {fileID: 1708562131}
+  startButton: {fileID: 1707654907}
 --- !u!1 &1707654905
 GameObject:
   m_ObjectHideFlags: 0
