@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        
         if(farmNameField != null)
         {
             farmNameField.text = "";
@@ -48,15 +49,37 @@ public class MainMenu : MonoBehaviour
     {
         if (farmNameField.text == "" )
         {
-            //To Do:Instantiate a warning UI
-            //*** implement Instantiation
-            //notificationsPanel.transform.parent = Instantiate(notificationPrefab);
-            Debug.LogWarning($"No farm name entered");
+            //Instantiate a warning UI
+            string msg = $"No farm name entered";
+            
+            CreateNotify(msg, Notification.NotificationTypes.Alert);
+
+            Debug.LogWarning($"{msg}");
             return;
         }
         
         //get farm name and save it DataManager instance tu use during game session
         SaveFarmName();
         SceneManager.LoadScene(1);
+    }
+
+    private void CreateNotify(string msg, Notification.NotificationTypes type)
+    {
+        var notif = Instantiate(notificationPrefab);
+        notif.transform.SetParent(notificationsPanel.transform);
+
+        Notification notif_comp = notif.GetComponent<Notification>();
+
+        notif_comp.NotificationFormat(msg, type);
+    }
+
+    private void CreateNotify(string msg, Color color)
+    {
+        var notif = Instantiate(notificationPrefab);
+        notif.transform.SetParent(notificationsPanel.transform);
+
+        Notification notif_comp = notif.GetComponent<Notification>();
+
+        notif_comp.NotificationFormat(msg, color);
     }
 }
