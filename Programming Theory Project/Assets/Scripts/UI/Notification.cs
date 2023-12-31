@@ -6,20 +6,17 @@ using UnityEngine.UI;
 public class Notification : MonoBehaviour
 {
 
+    //public string NotificationMessage { set; private get; }
     public enum NotificationTypes {Alert, Warning, Info }
-    private NotificationTypes Type = NotificationTypes.Alert;
-    public string NotificationMessage { set; private get; }
-
-    //public Color[] NotificationColors = new Color[4] { new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0) };
-
+    //private NotificationTypes Type = NotificationTypes.Alert;
+    
     [SerializeField] private Text notificationText;
     
-    [SerializeField] 
     private Dictionary<NotificationTypes, Color> NotificationColors = new Dictionary<NotificationTypes, Color>() 
     {
-        {NotificationTypes.Alert, Color.HSVToRGB(56,100,93)},
-        {NotificationTypes.Warning, Color.HSVToRGB(355,100,85)},
-        {NotificationTypes.Info, Color.HSVToRGB(216,80,93)}
+        {NotificationTypes.Alert, new Color(0.95f, 0.74f, 0.10f)},
+        {NotificationTypes.Warning, new Color(0.83f, 0.15f, 0.15f)},
+        {NotificationTypes.Info, new Color(0.18f, 0.48f, 0.92f)}
     };
 
 
@@ -29,37 +26,20 @@ public class Notification : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NotificationFormat(string Message, NotificationTypes type)
     {
-        
-    }
-
-    void FormatNotification(string Message, NotificationTypes type)
-    {
-        notificationText.text = Message;
+        notificationText.material.color = Color.white;
         notificationText.color = NotificationColors[type];
+        notificationText.text = Message;
 
-        /*
-        switch (type)
-        {
-            case NotificationTypes.Alert:
-                notificationText.color = NotificationColors[];
-                break;
-
-            case NotificationTypes.Warning:
-                notificationText.color = Color.red;
-                break;
-
-            case NotificationTypes.Info:
-                notificationText.color = Color.blue;
-                break;
-
-            default:
-            notificationText.color = Color.white;
-                break;
-        }
-        */
+        Debug.Log(NotificationColors[type]);
     }
 
+    public void NotificationFormat(string Message, Color color)
+    {
+        notificationText.color = color;
+        notificationText.text = Message;
+
+        Debug.Log(color);
+    }
 }
