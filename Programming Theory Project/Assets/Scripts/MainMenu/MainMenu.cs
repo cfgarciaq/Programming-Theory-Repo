@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour
         string farm_name = farmNameField.text;
         // to do: save farms name to static class
 
-        //DataManager.FarmName = farm_name;
+        DataManager.Instance.FarmName = farm_name;
         //other stuff if needed
     }
 
@@ -50,7 +50,9 @@ public class MainMenu : MonoBehaviour
             Debug.LogWarning($"No farm name entered");
             return;
         }
-        //get farm name and save it for the play session
+        
+        //get farm name and save it DataManager instance tu use during game session
+        SaveFarmName();
         SceneManager.LoadScene(1);
     }
 }
