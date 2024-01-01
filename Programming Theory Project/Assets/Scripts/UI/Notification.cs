@@ -30,16 +30,18 @@ public class Notification : MonoBehaviour
     {
         notificationText.material.color = Color.white;
         notificationText.color = NotificationColors[type];
-        notificationText.text = Message;
+        DateTime date_time = DateTime.Now;
+        notificationText.text = $"[{date_time.Hour}:{date_time.Minute}] {Message}";
 
-        Debug.Log(NotificationColors[type]);
+        Debug.Log($"{NotificationColors[type]}{Message}");
     }
 
     public void NotificationFormat(string Message, Color color)
     {
         notificationText.color = color;
-        notificationText.text = Message;
+        DateTime date_time = DateTime.Now;
+        notificationText.text = $"[{date_time.Hour}:{date_time.Minute}] {Message}";
 
-        Debug.Log(color);
+        Debug.Log($"{color}{Message}");
     }
 }
