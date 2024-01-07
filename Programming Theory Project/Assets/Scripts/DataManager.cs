@@ -5,6 +5,8 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance;
     public string FarmName { get; set; }
 
+    private AnimalData AnimalData { get; set; }
+
     private void Awake()
     {
         if (Instance != null)
