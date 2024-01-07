@@ -7,12 +7,12 @@ public class Duck : Animal
     // Start is called before the first frame update
     protected override void Start()
     {
-        animalType = AnimalType.Duck;
+        animalType = EAnimalType.Duck;
         base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         
     }
