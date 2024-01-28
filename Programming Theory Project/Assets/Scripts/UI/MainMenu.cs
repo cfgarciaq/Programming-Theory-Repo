@@ -8,6 +8,9 @@ using UnityEngine.UI; // .UI clasic UI system - .UIElements new UI Toolkit Syste
 
 public class MainMenu : MonoBehaviour
 {
+    //ENCAPSULATION
+    // using SerializeField to display members in Editor
+
     [SerializeField] private InputField farmNameField;
     [SerializeField] private Button startButton;
     [SerializeField] private GameObject notificationsPanel;
