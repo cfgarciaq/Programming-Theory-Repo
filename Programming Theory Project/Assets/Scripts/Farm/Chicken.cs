@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//INHERITANCE
 public class Chicken : Animal
 {
-    // Start is called before the first frame update
+    //POLYMORPHISM
     protected override void Start()
     {
         animalType = EAnimalType.Chicken;
         base.Start();
     }
 
-    // Update is called once per frame
+    //POLYMORPHISM
     protected override void Update()
     {
-        
+        base.Update();
     }
 }
