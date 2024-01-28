@@ -10,9 +10,11 @@ public class CursorManager : MonoBehaviour
     [SerializeField]
     private GameObject animalInfoPanel;
 
+    private Ray ray;
+    private Animal animal = null;
 
-    private IInteractable objectSelected;
-    // Start is called before the first frame update
+    //private IInteractable objectSelected;
+
     void Start()
     {
         camera = Camera.main;
@@ -25,30 +27,46 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            SelectingObjects();
-        }
+        Vector3 mousePos = Input.mousePosition;
+        SelectingObjects(mousePos);        
     }
 
-    private void SelectingObjects()
+    private void SelectingObjects(Vector3 mousePosition)
     {
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 50, Color.blue);
+        ray = camera.ScreenPointToRay(mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.blue);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (Input.GetMouseButtonUp(0))
         {
-            objectSelected = hitInfo.collider as IInteractable;
-            if (objectSelected != null)
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
             {
-                Debug.Log($"{objectSelected.GetAnimalData.AnimalType} was selected");
-                animalInfoPanel.GetComponent<AnimalInfoPanel>().SetAnimalData(objectSelected.GetAnimalData);
-                animalInfoPanel.SetActive(true);
-            }
-            else
-            {
-                Debug.Log($"deselected");
-                animalInfoPanel.SetActive(false);
+                GameObject objectSelected = hitInfo.collider.gameObject;
+
+                if(objectSelected == null) 
+                {
+                    Debug.Log($"nothing selected");
+                    return;
+                }
+
+                if (objectSelected.GetComponent<Animal>())
+                {
+                    animal = objectSelected.GetComponent<Animal>();
+                    animal.IsSelected = true;
+
+                    Debug.Log($"{animal.GetAnimalData.AnimalType} was selected");
+                    
+                    animalInfoPanel.GetComponent<AnimalInfoPanel>().AnimalData = animal.GetAnimalData;
+                    animalInfoPanel.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log($"deselected");
+                    
+                    animal.IsSelected = false; //set isSelected false to turn off selection marker
+                    animal = null; //set reference to null
+
+                    animalInfoPanel.SetActive(false);
+                }
             }
         }
     }
