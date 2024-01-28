@@ -5,8 +5,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(BoxCollider))]
-public class Animal : MonoBehaviour, IInteractable
+
+//ABSTRACTION
+public abstract class Animal : MonoBehaviour
 {
+    //ENCAPSULATION
     protected enum EAnimalType { Null, Chicken, Cow, Duck, Pig, Sheep }
     protected enum EFeedStatus { Hungry, Nourished }
     protected enum EHappinessStatus { Sad, Happy }
@@ -24,12 +27,17 @@ public class Animal : MonoBehaviour, IInteractable
     protected int maxFeedMinutes, maxHappinessMinutes;
     protected float feedTime, happinessTime, maxFeedSeconds, maxHappinessSeconds;
 
-    protected bool isSelected = false;
+    protected bool isSelected = false, hasMouseOver = false;
 
     protected AnimalData data = new AnimalData();
     protected Renderer renderer;
 
+    [SerializeField]
+    protected GameObject SelectionIndicator;
+
     #region Properties
+
+    //ENCAPSULATION
     protected string AnimalType 
     { 
         get => animalType.ToString();
@@ -44,14 +52,17 @@ public class Animal : MonoBehaviour, IInteractable
     {
         get => happinessStatus.ToString();
     }
+
     #endregion
 
-    #region InterfaceMethods
+    #region INTERFACE METHODS
+
+    //ENCAPSULATION USING INTERFACES
     public AnimalData GetAnimalData 
     {
         get
         {
-            UpdateAnimalData();
+            //UpdateAnimalData();
             return data;
         }
     }
@@ -71,7 +82,11 @@ public class Animal : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
         renderer = GetComponent<Renderer>();
         
-        if(animalType != EAnimalType.Null)
+        isSelected = false;
+        SelectionIndicator.SetActive(isSelected);
+
+
+        if (animalType != EAnimalType.Null)
         {
             MakeNoise();
         }
@@ -86,23 +101,32 @@ public class Animal : MonoBehaviour, IInteractable
     {
         FeedingCalculation();
         HappinessCalculation();
+        SelectionMarker();
     }
 
     protected void OnMouseEnter()
     {
-
+        
     }
 
     protected void OnMouseOver()
     {
         //Activate OverMouse Effect
         //Debug.Log($"Mouse over {AnimalType}");
+        hasMouseOver = true;
     }
 
     protected void OnMouseExit()
     {
         //Deactivate OverMouse Effect
         //Debug.Log($"Mouse exit {AnimalType}");
+        hasMouseOver = false;
+    }
+
+    protected void SelectionMarker()
+    {
+        bool activate = isSelected || hasMouseOver;
+        SelectionIndicator.SetActive(activate);
     }
 
     protected virtual void MakeNoise()
@@ -169,45 +193,53 @@ public class Animal : MonoBehaviour, IInteractable
 
     protected void FeedingCalculation()
     {
-        Debug.Log($"{AnimalType} feed time: [{feedTime}]");
+        //Debug.Log($"{AnimalType} feed time: [{feedTime}]");
         
-        if(feedTime < 0)
+        if(feedTime > 0)
         {
-            return;
+            feedTime -= Time.deltaTime;
         }
-
-        feedTime -= Time.deltaTime;
+        else
+        {
+            feedTime = 0;
+        }
         
         if (feedTime <= PercentOf(maxFeedSeconds, 50f) && feedStatus == EFeedStatus.Nourished) 
         {
             feedStatus = EFeedStatus.Hungry;
+            UpdateAnimalData();
         }
 
         if (feedTime > PercentOf(maxFeedSeconds, 50f) && feedStatus == EFeedStatus.Hungry)
         {
             feedStatus = EFeedStatus.Nourished;
+            UpdateAnimalData();
         }
     }
 
     protected void HappinessCalculation()
     {
-        Debug.Log($"{AnimalType} Happiness time: [{happinessTime}]");
+        //Debug.Log($"{AnimalType} Happiness time: [{happinessTime}]");
         
-        if (happinessTime <= 0)
+        if (happinessTime > 0f)
         {
-            return;
+            happinessTime -= Time.deltaTime;
         }
-
-        happinessTime -= Time.deltaTime;
+        else
+        {
+            happinessTime = 0;
+        }
 
         if (happinessTime <= PercentOf(maxHappinessSeconds, 50f) && happinessStatus == EHappinessStatus.Happy)
         {
             happinessStatus = EHappinessStatus.Sad;
+            UpdateAnimalData();
         }
 
         if (happinessTime > PercentOf(maxHappinessSeconds, 50f) && happinessStatus == EHappinessStatus.Sad)
         {
             happinessStatus = EHappinessStatus.Happy;
+            UpdateAnimalData();
         }
     }
 
@@ -224,6 +256,8 @@ public class Animal : MonoBehaviour, IInteractable
     }
 }
 
+
+//public class to transfer animal data with other scripts like AnimalInfoPanel.cs
 public class AnimalData
 {
     public string AnimalType { get; set; }
