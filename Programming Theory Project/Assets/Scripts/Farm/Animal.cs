@@ -30,7 +30,7 @@ public abstract class Animal : MonoBehaviour
     protected bool isSelected = false, hasMouseOver = false;
 
     protected AnimalData data = new AnimalData();
-    protected Renderer renderer;
+    //protected Renderer renderer;
 
     [SerializeField]
     protected GameObject SelectionIndicator;
@@ -80,7 +80,7 @@ public abstract class Animal : MonoBehaviour
     protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
         
         isSelected = false;
         SelectionIndicator.SetActive(isSelected);
@@ -164,19 +164,19 @@ public abstract class Animal : MonoBehaviour
     public virtual void Eat()
     {
         feedTime += PercentOf(maxFeedSeconds, 15);        
+        feedTime = Math.Clamp(feedTime, 0, maxFeedSeconds);
         
-        if (feedTime > maxFeedSeconds) { feedTime = maxFeedSeconds; }
-        
-        Debug.Log($"{animalType} is eating");
+        Debug.Log($"{animalType} ate something {feedTime}");
     }
 
     public void Caress()
     {
         happinessTime += PercentOf(maxHappinessSeconds, 25);
+        happinessTime = Math.Clamp(happinessTime, 0, maxHappinessSeconds);
 
         MakeNoise();
 
-        Debug.Log($"{animalType} likes being caressed");
+        Debug.Log($"{animalType} likes being caressed (t_left:{happinessTime})");
     }
 
     protected void StatsCalculation()
