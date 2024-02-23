@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1965851562501010, guid: e82139b3bae6212439ea1e85ad29678b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4589997030424458, guid: e82139b3bae6212439ea1e85ad29678b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.343414
