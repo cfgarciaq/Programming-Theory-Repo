@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AnimalAI))]
 
 //ABSTRACTION
 public abstract class Animal : MonoBehaviour
