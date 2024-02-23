@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalType: 2
-  noiseAudioClip: {fileID: 0}
+  noiseAudioClip: {fileID: 8300000, guid: 0f909ffdb6f03d143983b479b1e8d456, type: 3}
   maxFeedMinutes: 3
   maxHappinessMinutes: 3
   SelectionIndicator: {fileID: 4920275971570527688}
