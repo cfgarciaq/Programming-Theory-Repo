@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorManager : MonoBehaviour
 {
@@ -18,66 +20,66 @@ public class CursorManager : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
-
-        //animalInfoPanel = Instantiate(AnimalInfoPanelPrefab);
-        //animalInfoPanel.transform.SetParent(this.transform);
         animalInfoPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 mousePos = Input.mousePosition;
-        SelectingObjects(mousePos);        
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            SelectingObjects(mousePos);
+        }
     }
 
     private void SelectingObjects(Vector3 mousePosition)
     {
         ray = camera.ScreenPointToRay(mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.blue);
-
-        if (Input.GetMouseButtonUp(0))
+        
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
         {
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
+            GameObject objectSelected = hitInfo.collider.gameObject;
+            Debug.Log($"{objectSelected.layer}");
+
+            if (objectSelected.GetComponent<Animal>())
             {
-                GameObject objectSelected = hitInfo.collider.gameObject;
+                UnselectAnimal(); //this to prevent last clicked animal to stay selected
 
-                if(objectSelected == null) 
-                {
-                    Debug.Log($"nothing selected");
-                    return;
-                }
-
-                if (objectSelected.GetComponent<Animal>())
-                {
-                    animal = objectSelected.GetComponent<Animal>();
-                    animal.IsSelected = true;
-
-                    Debug.Log($"{animal.GetAnimalData.AnimalType} was selected");
-                    
-                    animalInfoPanel.GetComponent<AnimalInfoPanel>().AnimalData = animal.GetAnimalData;
-                    animalInfoPanel.SetActive(true);
-                }
-                else
-                {
-                    Debug.Log($"deselected");
-                    
-                    animal.IsSelected = false; //set isSelected false to turn off selection marker
-                    animal = null; //set reference to null
-
-                    animalInfoPanel.SetActive(false);
-                }
+                SelectAnimal(objectSelected);                    
             }
+            else
+            {
+                // if clicked object is not in UI layer deselect it
+                // this to prevent the Animal Info Panel to hide when trying to click a button
+
+                UnselectAnimal();
+                Debug.Log($"Nothing Selected");
+            }
+        }        
+    }
+
+    private void UnselectAnimal()
+    {
+        if (animal != null)
+        {
+            animal.IsSelected = false; //set isSelected false to turn off selection marker
+            animal = null; //set reference to null
         }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-    //    if (Physics.Raycast(ray, out RaycastHit hitInfo))
-    //    {
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawLine(ray.origin, ray.direction * 150);
-    //    }
-    //}
+    private void SelectAnimal(GameObject go)
+    {
+        if(animal != go.GetComponent<Animal>())
+        {
+            animal = go.GetComponent<Animal>();
+            animal.IsSelected = true;
+
+            animalInfoPanel.GetComponent<AnimalInfoPanel>().Animal = animal;
+            animalInfoPanel.SetActive(true);
+
+            Debug.Log($"{animal.GetAnimalData.AnimalType} was selected");
+        }        
+    }
 }
