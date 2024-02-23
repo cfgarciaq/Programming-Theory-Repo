@@ -38,17 +38,17 @@ public abstract class Animal : MonoBehaviour
     #region Properties
 
     //ENCAPSULATION
-    protected string AnimalType 
+    public string AnimalType 
     { 
         get => animalType.ToString();
     }
 
-    protected string FeedStatus
+    public string FeedStatus
     {
         get => feedStatus.ToString();
     }
 
-    protected string HappinessStatus
+    public string HappinessStatus
     {
         get => happinessStatus.ToString();
     }
