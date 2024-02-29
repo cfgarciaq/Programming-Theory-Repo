@@ -28,6 +28,11 @@ public abstract class Animal : MonoBehaviour
     protected int maxFeedMinutes, maxHappinessMinutes;
     protected float feedTime, happinessTime, maxFeedSeconds, maxHappinessSeconds;
 
+    [SerializeField]
+    protected Vector2 rngMovementDelayRange = new Vector2(0,1);
+    [SerializeField]
+    protected float rngMovementDistance = 5f;
+
     protected bool isSelected = false, hasMouseOver = false;
 
     protected AnimalData data = new AnimalData();
@@ -38,7 +43,7 @@ public abstract class Animal : MonoBehaviour
     [SerializeField]
     protected GameObject SelectionIndicator;
 
-    private float counter = 0;
+    protected float counter = 0, rngMovementDelay = 0;
 
     #region Properties
 
@@ -91,6 +96,8 @@ public abstract class Animal : MonoBehaviour
         isSelected = false;
         SelectionIndicator.SetActive(isSelected);
 
+        rngMovementDelay = GetMovementDelayRange();
+
 
         if (animalType != EAnimalType.Null)
         {
@@ -109,14 +116,12 @@ public abstract class Animal : MonoBehaviour
         HappinessCalculation();
         SelectionMarker();
 
+        RandomMovement();
 
-        counter += Time.deltaTime;
-        if (!isSelected && counter > 5)
-        {
-            counter = 0;
-            animalAI.MoveRandomly(10f);
-        }
     }
+
+
+    #region ON_MOUSE_FUNCTIONS
 
     protected void OnMouseEnter()
     {
@@ -137,10 +142,30 @@ public abstract class Animal : MonoBehaviour
         hasMouseOver = false;
     }
 
+    #endregion
+
     protected void SelectionMarker()
     {
         bool activate = isSelected || hasMouseOver;
         SelectionIndicator.SetActive(activate);
+    }
+
+    protected void RandomMovement()
+    {
+        counter += Time.deltaTime;
+        if (!isSelected && counter > rngMovementDelay)
+        {
+            counter = 0;
+            animalAI.MoveRandomly(rngMovementDistance);
+            rngMovementDelay = GetMovementDelayRange();
+        }
+
+        counter = Math.Clamp(counter, 0, rngMovementDelay + 1);
+    }
+
+    protected float GetMovementDelayRange()
+    {
+        return UnityEngine.Random.Range(rngMovementDelayRange.x, rngMovementDelayRange.y);
     }
 
     protected virtual void MakeNoise()
@@ -262,10 +287,6 @@ public abstract class Animal : MonoBehaviour
         return (float)value * percent / 100f;
     }
 
-    protected void MoveToRandomPoint()
-    {
-        // to add behavior
-    }
 
     protected void UpdateAnimalData()
     {
