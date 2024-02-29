@@ -33,6 +33,8 @@ public abstract class Animal : MonoBehaviour
     protected AnimalData data = new AnimalData();
     //protected Renderer renderer;
 
+    protected AnimalAI animalAI = null;
+
     [SerializeField]
     protected GameObject SelectionIndicator;
 
@@ -81,8 +83,9 @@ public abstract class Animal : MonoBehaviour
     protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        animalAI = GetComponent<AnimalAI>();
         //renderer = GetComponent<Renderer>();
-        
+
         isSelected = false;
         SelectionIndicator.SetActive(isSelected);
 
@@ -103,6 +106,11 @@ public abstract class Animal : MonoBehaviour
         FeedingCalculation();
         HappinessCalculation();
         SelectionMarker();
+
+        if (!isSelected)
+        {
+            animalAI.MoveRandomly(10f);
+        }
     }
 
     protected void OnMouseEnter()
@@ -247,6 +255,11 @@ public abstract class Animal : MonoBehaviour
     protected float PercentOf(float value, float percent)
     {
         return (float)value * percent / 100f;
+    }
+
+    protected void MoveToRandomPoint()
+    {
+        // to add behavior
     }
 
     protected void UpdateAnimalData()
