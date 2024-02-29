@@ -25,13 +25,7 @@ public class AnimalAI : MonoBehaviour
         m_Min = farmBounds.bounds.min;
         m_Max = farmBounds.bounds.max;
 
-        Debug.Log($"{gameObject.name} : center{m_Center}, min{m_Min}, max{m_Max}");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Debug.Log($"{gameObject.name} : center{m_Center}, min{m_Min}, max{m_Max}");
     }
 
     public void MoveRandomly(float distance)
