@@ -38,6 +38,8 @@ public abstract class Animal : MonoBehaviour
     [SerializeField]
     protected GameObject SelectionIndicator;
 
+    private float counter = 0;
+
     #region Properties
 
     //ENCAPSULATION
@@ -107,8 +109,11 @@ public abstract class Animal : MonoBehaviour
         HappinessCalculation();
         SelectionMarker();
 
-        if (!isSelected)
+
+        counter += Time.deltaTime;
+        if (!isSelected && counter > 5)
         {
+            counter = 0;
             animalAI.MoveRandomly(10f);
         }
     }
