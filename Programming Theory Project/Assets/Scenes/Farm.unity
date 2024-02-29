@@ -672,6 +672,65 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8dbf520fbf9649346ab83922bb624c6c, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &1606645569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606645570}
+  - component: {fileID: 1606645571}
+  m_Layer: 0
+  m_Name: FarmBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606645570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606645569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.33, y: 0, z: 1.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1818739646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1606645571
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606645569}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.58, y: 1, z: 16.8}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1818739646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7362033052443337516, guid: ee6e547a36f44444a806ae5e6b2dd0a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2522911762730818261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2085039925 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4799414090021899583, guid: ee6e547a36f44444a806ae5e6b2dd0a5,
@@ -955,7 +1014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7362033052443337516, guid: ee6e547a36f44444a806ae5e6b2dd0a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1606645570}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1126872108283688929, guid: ee6e547a36f44444a806ae5e6b2dd0a5,
         type: 3}
