@@ -42,7 +42,11 @@ public class AnimalInfoPanel : MonoBehaviour
         txt_animalFeed.text = "";
         txt_animalHappiness.text = "";
         
-        animal.IsSelected = false;
+        if(animal != null)
+        {
+            animal.IsSelected = false;
+        }
+        
         animal = null;
     }
 
