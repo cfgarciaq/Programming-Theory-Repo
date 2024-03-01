@@ -37,16 +37,23 @@ public class AnimalInfoPanel : MonoBehaviour
 
     private void ResetFields()
     {
-        animal = null;
 
         txt_animalType.text = "";
         txt_animalFeed.text = "";
         txt_animalHappiness.text = "";
+        
+        animal.IsSelected = false;
+        animal = null;
     }
 
     public void CaressAction()
     {
         animal.Caress();
+    }
+
+    public void FeedAction()
+    {
+        animal.Eat();
     }
 
     public void ClosePanel()
