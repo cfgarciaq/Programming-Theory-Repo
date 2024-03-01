@@ -1764,6 +1764,11 @@ PrefabInstance:
       propertyPath: m_FontData.m_Alignment
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4879023372658631407, guid: 1e38672e7aed7ba4d8db96735fcc45a1,
+        type: 3}
+      propertyPath: m_Text
+      value: Feed
+      objectReference: {fileID: 0}
     - target: {fileID: 5186302347486736661, guid: 1e38672e7aed7ba4d8db96735fcc45a1,
         type: 3}
       propertyPath: m_Name
