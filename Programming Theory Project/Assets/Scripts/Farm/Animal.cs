@@ -247,6 +247,7 @@ public abstract class Animal : MonoBehaviour
         {
             feedStatus = EFeedStatus.Hungry;
             UpdateAnimalData();
+            MakeNoise();
         }
 
         if (feedTime > PercentOf(maxFeedSeconds, 50f) && feedStatus == EFeedStatus.Hungry)
@@ -273,6 +274,7 @@ public abstract class Animal : MonoBehaviour
         {
             happinessStatus = EHappinessStatus.Sad;
             UpdateAnimalData();
+            MakeNoise();
         }
 
         if (happinessTime > PercentOf(maxHappinessSeconds, 50f) && happinessStatus == EHappinessStatus.Sad)
