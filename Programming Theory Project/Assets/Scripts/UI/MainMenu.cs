@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
             
             CreateNotify(msg, Notification.NotificationTypes.Alert);
 
-            Debug.LogWarning($"{msg}");
+            //Debug.LogWarning($"{msg}");
             return;
         }
         
