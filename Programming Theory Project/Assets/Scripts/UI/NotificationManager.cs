@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class NotificationManager : MonoBehaviour
 {
-
+    public static NotificationManager Instance { get; private set; }
 
     [SerializeField] private GameObject notificationsPanel;
     [SerializeField] private GameObject notificationPrefab;
 
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        
+        if(Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         if(notificationsPanel == null)
         {
             Debug.LogWarning($"{nameof(notificationsPanel)} field not assigned, drag and drop it in editor");
