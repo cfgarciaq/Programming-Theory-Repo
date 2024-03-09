@@ -48,6 +48,8 @@ public abstract class Animal : MonoBehaviour
     #region Properties
 
     //ENCAPSULATION
+
+    public bool HasMouseOver { get { return hasMouseOver; } set { hasMouseOver = value; } }
     public string AnimalType 
     { 
         get => animalType.ToString();
@@ -102,6 +104,7 @@ public abstract class Animal : MonoBehaviour
         if (animalType != EAnimalType.Null)
         {
             MakeNoise();
+            
         }
 
         StatsCalculation();
@@ -120,30 +123,6 @@ public abstract class Animal : MonoBehaviour
 
     }
 
-
-    #region ON_MOUSE_FUNCTIONS
-
-    protected void OnMouseEnter()
-    {
-        
-    }
-
-    protected void OnMouseOver()
-    {
-        //Activate OverMouse Effect
-        //Debug.Log($"Mouse over {AnimalType}");
-        hasMouseOver = true;
-    }
-
-    protected void OnMouseExit()
-    {
-        //Deactivate OverMouse Effect
-        //Debug.Log($"Mouse exit {AnimalType}");
-        hasMouseOver = false;
-    }
-
-    #endregion
-
     protected void SelectionMarker()
     {
         bool activate = isSelected || hasMouseOver;
@@ -152,15 +131,23 @@ public abstract class Animal : MonoBehaviour
 
     protected void RandomMovement()
     {
-        counter += Time.deltaTime;
+        if (counter < rngMovementDelay)
+        {
+            counter += Time.deltaTime;
+            //just to limit counter min and max values
+            //counter = Math.Clamp(counter, 0, rngMovementDelay + 1);
+        }
+
         if (!isSelected && counter > rngMovementDelay)
         {
+            //reset counter
             counter = 0;
+            //move to random coordinate in walkablea area
             animalAI.MoveRandomly(rngMovementDistance);
+            //set new movement delay to add more randomness
             rngMovementDelay = GetMovementDelayRange();
         }
 
-        counter = Math.Clamp(counter, 0, rngMovementDelay + 1);
     }
 
     protected float GetMovementDelayRange()
@@ -176,27 +163,30 @@ public abstract class Animal : MonoBehaviour
         }
         else
         {
+            string msg = "";
             switch (animalType)
             {
                 case EAnimalType.Chicken:
-                    Debug.Log($"Kokoroko!");
+                    msg = "Kokoroko!";
                     break;
                 case EAnimalType.Cow:
-                    Debug.Log($"Moo!");
+                    msg = "Moo!";
                     break;
                 case EAnimalType.Duck:
-                    Debug.Log($"Quack!");
+                    msg = "Quack!";
                     break;
                 case EAnimalType.Pig:
-                    Debug.Log($"Oink!");
+                    msg = "Oink!";
                     break;
                 case EAnimalType.Sheep:
-                    Debug.Log($"Baa!");
+                    msg = "Baa!";
                     break;
                 default:
-                    Debug.Log($"Awkward Silence");
+                    msg = "Awkward Silence!";
                     break;
             }
+
+            NotificationManager.Instance.CreateNotify(msg, Notification.NotificationTypes.Info);
         }
     }
 
@@ -205,7 +195,8 @@ public abstract class Animal : MonoBehaviour
         feedTime += PercentOf(maxFeedSeconds, 15);        
         feedTime = Math.Clamp(feedTime, 0, maxFeedSeconds);
         
-        Debug.Log($"{animalType} ate something {feedTime}");
+        string msg = ($"{animalType} ate something {feedTime}");
+        NotificationManager.Instance.CreateNotify(msg, Notification.NotificationTypes.Info);
     }
 
     public void Caress()
@@ -213,9 +204,8 @@ public abstract class Animal : MonoBehaviour
         happinessTime += PercentOf(maxHappinessSeconds, 25);
         happinessTime = Math.Clamp(happinessTime, 0, maxHappinessSeconds);
 
-        MakeNoise();
-
-        Debug.Log($"{animalType} likes being caressed (t_left:{happinessTime})");
+        string msg = ($"{animalType} likes being caressed (t_left:{happinessTime})");
+        NotificationManager.Instance.CreateNotify(msg, Notification.NotificationTypes.Info);
     }
 
     protected void StatsCalculation()
@@ -275,12 +265,17 @@ public abstract class Animal : MonoBehaviour
             happinessStatus = EHappinessStatus.Sad;
             UpdateAnimalData();
             MakeNoise();
+
+            NotificationManager.Instance.CreateNotify($"{animalType} is Sad {nameof(EHappinessStatus.Sad)}", Notification.NotificationTypes.Info);
         }
 
         if (happinessTime > PercentOf(maxHappinessSeconds, 50f) && happinessStatus == EHappinessStatus.Sad)
         {
             happinessStatus = EHappinessStatus.Happy;
             UpdateAnimalData();
+            MakeNoise();
+
+            NotificationManager.Instance.CreateNotify($"{animalType} is Happy {nameof(EHappinessStatus.Happy)}", Notification.NotificationTypes.Info);
         }
     }
 
