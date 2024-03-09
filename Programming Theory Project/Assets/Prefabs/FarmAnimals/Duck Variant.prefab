@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4346093141753912, guid: 32026357c04e0e944835774b42e3c1b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000015258789
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 4346093141753912, guid: 32026357c04e0e944835774b42e3c1b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -154,10 +154,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1522729216997060, guid: 32026357c04e0e944835774b42e3c1b7,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6691981618197741517}
-    - targetCorrespondingSourceObject: {fileID: 1522729216997060, guid: 32026357c04e0e944835774b42e3c1b7,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7742090460394168977}
     - targetCorrespondingSourceObject: {fileID: 1522729216997060, guid: 32026357c04e0e944835774b42e3c1b7,
         type: 3}
@@ -171,6 +167,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -3609650566348391709}
+    - targetCorrespondingSourceObject: {fileID: 1522729216997060, guid: 32026357c04e0e944835774b42e3c1b7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6691981618197741517}
+    - targetCorrespondingSourceObject: {fileID: 1522729216997060, guid: 32026357c04e0e944835774b42e3c1b7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8253929367705332079}
   m_SourcePrefab: {fileID: 100100000, guid: 32026357c04e0e944835774b42e3c1b7, type: 3}
 --- !u!4 &1847610652481367018 stripped
 Transform:
@@ -280,23 +284,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6691981618197741517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850434419250191638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6979003e779c94dafb7824208da400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animalType: 3
-  noiseAudioClip: {fileID: 8300000, guid: 94c8d2f420750e64ebc7a10788c5bfd2, type: 3}
-  maxFeedMinutes: 1
-  maxHappinessMinutes: 1
-  SelectionIndicator: {fileID: 9066929489697280235}
 --- !u!65 &7742090460394168977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -337,8 +324,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
-  m_Height: 0.55
+  m_Radius: 0.3
+  m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0.225, z: -0.05}
 --- !u!54 &-8090623295863348167
@@ -375,7 +362,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850434419250191638}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 1479372276
   m_Radius: 0.225
   m_Speed: 3.5
@@ -390,3 +377,35 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6691981618197741517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850434419250191638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6979003e779c94dafb7824208da400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalType: 3
+  noiseAudioClip: {fileID: 8300000, guid: 94c8d2f420750e64ebc7a10788c5bfd2, type: 3}
+  maxFeedMinutes: 1
+  maxHappinessMinutes: 1
+  rngMovementDelayRange: {x: 3, y: 5}
+  rngMovementDistance: 3
+  SelectionIndicator: {fileID: 9066929489697280235}
+--- !u!114 &8253929367705332079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850434419250191638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44b11cf5cbbed240a966b00af22f87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: -3609650566348391709}

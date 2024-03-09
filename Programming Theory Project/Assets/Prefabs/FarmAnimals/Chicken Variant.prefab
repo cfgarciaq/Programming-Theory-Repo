@@ -154,10 +154,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1206511787925574, guid: 3b1e3e9155d404942bc65d9aa80120ba,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6716814737240480574}
-    - targetCorrespondingSourceObject: {fileID: 1206511787925574, guid: 3b1e3e9155d404942bc65d9aa80120ba,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8078857883550165640}
     - targetCorrespondingSourceObject: {fileID: 1206511787925574, guid: 3b1e3e9155d404942bc65d9aa80120ba,
         type: 3}
@@ -171,6 +167,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1493240501390943250}
+    - targetCorrespondingSourceObject: {fileID: 1206511787925574, guid: 3b1e3e9155d404942bc65d9aa80120ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6716814737240480574}
+    - targetCorrespondingSourceObject: {fileID: 1206511787925574, guid: 3b1e3e9155d404942bc65d9aa80120ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 726730664288794558}
   m_SourcePrefab: {fileID: 100100000, guid: 3b1e3e9155d404942bc65d9aa80120ba, type: 3}
 --- !u!1 &4734251379422936980 stripped
 GameObject:
@@ -274,23 +278,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6716814737240480574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4734251379422936980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac5e705c4e20bcc42a08b0c5c287692d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animalType: 1
-  noiseAudioClip: {fileID: 8300000, guid: 696b6b6758ec7b44f9facf436c8f8e57, type: 3}
-  maxFeedMinutes: 1
-  maxHappinessMinutes: 1
-  SelectionIndicator: {fileID: 9117771406091845896}
 --- !u!65 &8078857883550165640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -331,8 +318,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 0.7
+  m_Radius: 0.38
+  m_Height: 1.09
   m_Direction: 2
   m_Center: {x: 0, y: 0.325, z: 0}
 --- !u!54 &5699030178072967440
@@ -384,6 +371,38 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6716814737240480574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734251379422936980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5e705c4e20bcc42a08b0c5c287692d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalType: 1
+  noiseAudioClip: {fileID: 8300000, guid: 696b6b6758ec7b44f9facf436c8f8e57, type: 3}
+  maxFeedMinutes: 1
+  maxHappinessMinutes: 1
+  rngMovementDelayRange: {x: 1, y: 3}
+  rngMovementDistance: 2
+  SelectionIndicator: {fileID: 9117771406091845896}
+--- !u!114 &726730664288794558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734251379422936980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44b11cf5cbbed240a966b00af22f87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1493240501390943250}
 --- !u!4 &4735665212236949342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4309743995697292, guid: 3b1e3e9155d404942bc65d9aa80120ba,
