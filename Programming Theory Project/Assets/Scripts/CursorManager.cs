@@ -12,6 +12,8 @@ public class CursorManager : MonoBehaviour
     [SerializeField]
     private GameObject animalInfoPanel;
 
+    private GameObject hoveredObject = null;
+
     private Ray ray;
     private Animal animal = null;
 
@@ -26,10 +28,27 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonUp(0))
+        Vector3 mousePos = Input.mousePosition;
+        SelectingObjects(mousePos);
+    }
+
+    private void IsMouseOverAnimal(GameObject obj)
+    {
+        if (LayerMask.LayerToName(obj.layer).Equals("Animals"))
         {
-            Vector3 mousePos = Input.mousePosition;
-            SelectingObjects(mousePos);
+            obj.GetComponent<Animal>().HasMouseOver = true;
+        }
+    }
+
+    private void HasMouseExitAnimal(GameObject previousObj, GameObject currentObj)
+    {
+        
+        if (currentObj != previousObj && previousObj != null)
+        {
+            if (LayerMask.LayerToName(previousObj.layer).Equals("Animals"))
+            {
+                previousObj.GetComponent<Animal>().HasMouseOver = false;
+            }
         }
     }
 
@@ -40,22 +59,30 @@ public class CursorManager : MonoBehaviour
         
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
         {
-            GameObject objectSelected = hitInfo.collider.gameObject;
-            Debug.Log($"{objectSelected.layer}");
 
-            if (objectSelected.GetComponent<Animal>())
+            HasMouseExitAnimal(hoveredObject, hitInfo.collider.gameObject);
+
+            hoveredObject = hitInfo.collider.gameObject;
+
+            IsMouseOverAnimal(hoveredObject);            
+
+            if (Input.GetMouseButtonUp(0))
             {
-                UnselectAnimal(); //this to prevent last clicked animal to stay selected
 
-                SelectAnimal(objectSelected);                    
-            }
-            else
-            {
-                // if clicked object is not in UI layer deselect it
-                // this to prevent the Animal Info Panel to hide when trying to click a button
+                if (hoveredObject.GetComponent<Animal>())
+                {
+                    UnselectAnimal(); //this to prevent last clicked animal to stay selected
 
-                UnselectAnimal();
-                Debug.Log($"Nothing Selected");
+                    SelectAnimal(hoveredObject);
+                }
+                else
+                {
+                    // if clicked object is not in UI layer deselect it
+                    // this to prevent the Animal Info Panel to hide when trying to click a button
+
+                    UnselectAnimal();
+                    Debug.Log($"Nothing Selected");
+                }
             }
         }        
     }
