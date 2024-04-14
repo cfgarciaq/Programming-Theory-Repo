@@ -6,6 +6,10 @@ using UnityEngine;
 public class Pig : Animal
 {
     //POLYMORPHISM
+    //Members values are set in Editor
+
+
+    //POLYMORPHISM
     protected override void Start()
     {
         animalType = EAnimalType.Pig;

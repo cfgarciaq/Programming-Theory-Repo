@@ -68,6 +68,7 @@ public class MainMenu : MonoBehaviour
 
     private void CreateNotify(string msg, Notification.NotificationTypes type)
     {
+        //INSTANTIATION 
         var notif = Instantiate(notificationPrefab);
         notif.transform.SetParent(notificationsPanel.transform);
 
@@ -75,6 +76,7 @@ public class MainMenu : MonoBehaviour
 
         notif_comp.NotificationFormat(msg, type);
     }
+
 
     private void CreateNotify(string msg, Color color)
     {

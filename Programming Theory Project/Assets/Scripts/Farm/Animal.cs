@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(AnimalAI))]
 
 //ABSTRACTION
-public abstract class Animal : MonoBehaviour
+public class Animal : MonoBehaviour
 {
     //ENCAPSULATION
     protected enum EAnimalType { Null, Chicken, Cow, Duck, Pig, Sheep }
@@ -83,12 +83,12 @@ public abstract class Animal : MonoBehaviour
     {
         set { isSelected = value; }
         get { return isSelected; }
-    }    
-    
+    }
+
     #endregion
 
 
-    // Start is called before the first frame update
+    // ABSTRACTION, INHERITANCE & POLYMORPHISM
     protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -112,7 +112,7 @@ public abstract class Animal : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // ABSTRACTION, ENCAPSULATION, INHERITANCE & POLYMORPHISM
     protected virtual void Update()
     {
         FeedingCalculation();
@@ -123,12 +123,14 @@ public abstract class Animal : MonoBehaviour
 
     }
 
+    // ABSTRACTION, ENCAPSULATION, INHERITANCE
     protected void SelectionMarker()
     {
         bool activate = isSelected || hasMouseOver;
         SelectionIndicator.SetActive(activate);
     }
 
+    // ABSTRACTION, ENCAPSULATION, INHERITANCE
     protected void RandomMovement()
     {
         if (counter < rngMovementDelay)
@@ -150,12 +152,14 @@ public abstract class Animal : MonoBehaviour
 
     }
 
+    // ABSTRACTION, ENCAPSULATION, INHERITANCE
     protected float GetMovementDelayRange()
     {
         return UnityEngine.Random.Range(rngMovementDelayRange.x, rngMovementDelayRange.y);
     }
 
-    protected virtual void MakeNoise()
+    // ABSTRACTION, ENCAPSULATION, INHERITANCE
+    protected void MakeNoise()
     {
         if(noiseAudioClip != null)
         {
@@ -190,6 +194,8 @@ public abstract class Animal : MonoBehaviour
         }
     }
 
+
+    // INHERITANCE
     public virtual void Eat()
     {
         feedTime += PercentOf(maxFeedSeconds, 15);        
@@ -199,6 +205,7 @@ public abstract class Animal : MonoBehaviour
         NotificationManager.Instance.CreateNotify(msg, Notification.NotificationTypes.Info);
     }
 
+    // INHERITANCE
     public void Caress()
     {
         happinessTime += PercentOf(maxHappinessSeconds, 25);
@@ -208,6 +215,7 @@ public abstract class Animal : MonoBehaviour
         NotificationManager.Instance.CreateNotify(msg, Notification.NotificationTypes.Info);
     }
 
+    // INHERITANCE
     protected void StatsCalculation()
     {
         maxFeedSeconds = maxFeedMinutes * 60;
@@ -220,6 +228,7 @@ public abstract class Animal : MonoBehaviour
         HappinessCalculation();
     }
 
+    // INHERITANCE & POLYMORPHISM
     protected void FeedingCalculation()
     {
         //Debug.Log($"{AnimalType} feed time: [{feedTime}]");
@@ -247,6 +256,7 @@ public abstract class Animal : MonoBehaviour
         }
     }
 
+    // INHERITANCE
     protected void HappinessCalculation()
     {
         //Debug.Log($"{AnimalType} Happiness time: [{happinessTime}]");
@@ -279,12 +289,13 @@ public abstract class Animal : MonoBehaviour
         }
     }
 
+    // INHERITANCE
     protected float PercentOf(float value, float percent)
     {
         return (float)value * percent / 100f;
     }
 
-
+    // INHERITANCE
     protected void UpdateAnimalData()
     {
         data.AnimalType = AnimalType;
@@ -295,6 +306,7 @@ public abstract class Animal : MonoBehaviour
 
 
 //public class to transfer animal data with other scripts like AnimalInfoPanel.cs
+// NOT USED...
 public class AnimalData
 {
     public string AnimalType { get; set; }

@@ -5,6 +5,10 @@ using UnityEngine;
 //INHERITANCE
 public class Cow : Animal
 {
+
+    //POLYMORPHISM
+    //Members values are set in Editor
+
     //POLYMORPHISM
     protected override void Start()
     {

@@ -50,16 +50,19 @@ public class AnimalInfoPanel : MonoBehaviour
         animal = null;
     }
 
+    //ABSTRACTION (FUNCTION CALLED BY UI BUTTONS)
     public void CaressAction()
     {
         animal.Caress();
     }
 
+    //ABSTRACTION (FUNCTION CALLED BY UI BUTTONS)
     public void FeedAction()
     {
         animal.Eat();
     }
 
+    //ABSTRACTION (FUNCTION CALLED BY UI BUTTONS)
     public void ClosePanel()
     {
         ResetFields();
